@@ -65,7 +65,7 @@ while True:
                         send_msg_reply(event.message_id, event.peer_id, f'{who}')
 
                 if event.text == "+хейт":
-                    if event.user_id in admins:
+                    if event.user_id in admins or event.user_id == bot_id:
                         msg = vk.messages.getById(message_ids=event.message_id)['items'][0]
                         if 'reply_message' in msg:
                             user = msg['reply_message']['from_id']
@@ -85,7 +85,7 @@ while True:
                         send_msg(event.peer_id, f'{choice}')
 
                 if event.text == "-хейт":
-                    if event.user_id in admins:
+                    if event.user_id in admins or event.user_id == bot_id:
                         msg = vk.messages.getById(message_ids=event.message_id)['items'][0]
                         if 'reply_message' in msg:
                             user = msg['reply_message']['from_id']
