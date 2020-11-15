@@ -5,7 +5,7 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 import sqlite3
 
 admins = []
-group_id =
+group_id = 
 token = ''
 
 conn = sqlite3.connect("db.db")
@@ -51,14 +51,24 @@ users = get_all_users()
 for user in users:
     user_ids.append(user[0])
 
+random.shuffle(config.VARIANTS)
+
+index = 0
+
 while True:
     try:
         for event in longpoll.listen():
             if event.type == VkBotEventType.MESSAGE_NEW:
 
                 if event.obj.from_id in user_ids:
-                    who = random.choice(config.VARIANTS)
-                    send_msg(event.obj.peer_id, f'{who}')
+                    if index < len(config.VARIANTS):
+                        send_msg(event.obj.peer_id, f'{config.VARIANTS[index]}')
+                        index += 1
+                    else:
+                        index = 0
+                        random.shuffle(config.VARIANTS)
+                        send_msg(event.obj.peer_id, f'{config.VARIANTS[index]}')
+                        index += 1
 
                 if event.object.text == "+хейт":
                     if event.obj.from_id in admins:
