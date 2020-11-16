@@ -104,13 +104,17 @@ def commands():
                             send_msg(event.peer_id, f'{choice}')
 
                     if split_text[0] in c.cooldown:
-                        if len(split_text) == 2 and split_text[1].isnumeric():
-                            settings_result.pop(1)
-                            settings_result.insert(1, int(split_text[1]))
-                            m.set_cooldown(int(split_text[1]), 1)
-                            send_msg(event.peer_id, f'✅ Задержка изменена на {split_text[1]} секунд')
+                        if event.user_id in c.u_admins:
+                            if len(split_text) == 2 and split_text[1].isnumeric():
+                                settings_result.pop(1)
+                                settings_result.insert(1, int(split_text[1]))
+                                m.set_cooldown(int(split_text[1]), 1)
+                                send_msg(event.peer_id, f'✅ Задержка изменена на {split_text[1]} секунд')
+                            else:
+                                send_msg(event.peer_id, '❎ Неверный формат команды')
                         else:
-                            send_msg(event.peer_id, '❎ Неверный формат команды')
+                            choice = random.choice(c.ERRORS)
+                            send_msg(event.peer_id, f'{choice}')
         except Exception as e:
             print(repr(e))
 
