@@ -27,7 +27,7 @@ for user in photo_users:
     photo_user_ids.append(user[0])
 
 settings_result = []
-settings = m.get_settings(1)
+settings = m.get_settings(2)
 for value in settings:
     settings_result.append(value)
 
@@ -160,7 +160,7 @@ def commands():
                             if event.obj.from_id in c.g_admins:
                                 settings_result.pop(1)
                                 settings_result.insert(1, int(split_text[2]))
-                                m.set_message_cooldown(int(split_text[2]), 1)
+                                m.set_message_cooldown(int(split_text[2]), 2)
                                 send_msg(event.obj.peer_id, f'✅ Задержка текста изменена на {split_text[2]} секунд')
                             else:
                                 choice = random.choice(c.ERRORS)
@@ -170,7 +170,7 @@ def commands():
                             if event.obj.from_id in c.g_admins:
                                 settings_result.pop(2)
                                 settings_result.insert(2, int(split_text[2]))
-                                m.set_photo_cooldown(int(split_text[2]), 1)
+                                m.set_photo_cooldown(int(split_text[2]), 2)
                                 send_msg(event.obj.peer_id, f'✅ Задержка фото изменена на {split_text[2]} секунд')
                             else:
                                 choice = random.choice(c.ERRORS)
