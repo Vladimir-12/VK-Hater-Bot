@@ -12,6 +12,8 @@ g_token = ''
 hate = ['+хейт', '+hate']
 unhate = ['-хейт', '-hate']
 cooldown = ['!кд', '!cd']
+
+# префиксы
 hate_message_prefix = ['текст', 'text']
 hate_photo_prefix = ['фото', 'photo']
 
